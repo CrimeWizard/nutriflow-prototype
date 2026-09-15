@@ -184,33 +184,30 @@ label.field-label {
 }
 .scroll::-webkit-scrollbar { display: none; }
 .scroll.no-nav { padding-bottom: 24px; }
-.scroll.has-sticky-footer { padding-bottom: 140px; }
-
 .screen-with-footer {
   flex: 1;
   display: flex;
   flex-direction: column;
   min-height: 0;
-  position: relative;
+  overflow: hidden;
+}
+.screen-with-footer > .scroll {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 16px;
 }
 
 .sticky-order-bar {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 72px;
+  flex-shrink: 0;
   padding: 12px 20px 10px;
-  background: rgba(255, 255, 255, 0.98);
+  background: var(--white);
   border-top: 1px solid var(--slate-200);
   box-shadow: 0 -4px 20px rgba(15, 23, 32, 0.06);
-  z-index: 10;
 }
 .sticky-order-bar .total-row {
   margin-bottom: 10px;
-}
-.sticky-order-bar.no-nav {
-  bottom: 0;
-  padding-bottom: 20px;
 }
 
 .field-error {
@@ -1027,11 +1024,20 @@ label.field-label {
   height: 44px;
   border-radius: 10px;
   background: var(--slate-100);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.cart-line-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.cart-line-thumb .food-image-fallback {
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 22px;
-  flex-shrink: 0;
 }
 .cart-line-info { flex: 1; }
 .cart-line-info h4 { font-size: 14px; font-weight: 600; }

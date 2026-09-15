@@ -22,7 +22,7 @@ export function Checkout() {
 
   return (
     <div className="screen-with-footer">
-      <div className="scroll no-nav fade-in has-sticky-footer">
+      <div className="scroll no-nav fade-in">
         <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 20 }}>
           <button type="button" className="btn-icon" onClick={() => setScreen('cart')} aria-label="Back">
             <ArrowLeft size={18} />

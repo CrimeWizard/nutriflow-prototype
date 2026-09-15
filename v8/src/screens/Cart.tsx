@@ -1,7 +1,16 @@
 import { Minus, Plus, ShoppingCart, Trash2 } from 'lucide-react';
+import { FoodImage } from '../components/FoodImage';
 import { groupCartItems, countCartItems, lineTotal } from '../cartUtils';
 import { useApp } from '../context/AppContext';
+import { mealPhoto } from '../lib/foodImages';
+import { productPhoto } from '../lib/productImages';
 import { formatEgp } from '../utils';
+import type { CartItem } from '../types';
+
+function cartItemPhoto(item: CartItem): string | null {
+  if (item.source === 'restaurant') return mealPhoto(item.productId);
+  return productPhoto({ name: item.name, category: 'Pantry' });
+}
 
 export function Cart() {
   const {
@@ -30,7 +39,7 @@ export function Cart() {
 
   return (
     <div className="screen-with-footer">
-      <div className="scroll fade-in has-sticky-footer">
+      <div className="scroll fade-in">
         <div className="page-header">
           <h1>Your cart</h1>
           <p>{countCartItems(cart)} items · {groups.size} {groups.size === 1 ? 'delivery' : 'deliveries'} · Pay on delivery</p>
@@ -56,7 +65,14 @@ export function Cart() {
               </div>
               {items.map((item) => (
                 <div key={item.cartLineId} className="cart-line">
-                  <div className="cart-line-thumb">{item.image}</div>
+                  <div className="cart-line-thumb">
+                    <FoodImage
+                      src={cartItemPhoto(item)}
+                      fallback={item.image}
+                      alt=""
+                      className="cart-line-img"
+                    />
+                  </div>
                   <div className="cart-line-info">
                     <h4>{item.brand ? `${item.brand} — ${item.name}` : item.name}</h4>
                     <p>
