@@ -2,7 +2,7 @@ import type { ProductCategory } from '../types';
 
 const BY_KEYWORD: [RegExp, string][] = [
   [/yogurt|labneh/i, '/images/products/yogurt.jpg'],
-  [/chicken/i, '/images/products/chicken.jpg'],
+  [/chicken|whole chicken/i, '/images/products/chicken.jpg'],
   [/egg/i, '/images/products/eggs.jpg'],
   [/rice/i, '/images/products/rice.jpg'],
   [/oat/i, '/images/products/oats.jpg'],

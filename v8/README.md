@@ -1,6 +1,12 @@
 # NutriFlow Prototype v8
 
-**Pillar 4 + v8.2 polish** — trust copy, food photos, quick-meal preview, honest budget UX. Built on v7 habit + v6 commerce + v5 weekly plan.
+**Pillar 4 + v8.3 polish** — trust copy, food photos, quick-meal preview, honest budget UX. Built on v7 habit + v6 commerce + v5 weekly plan.
+
+## v8.3 polish
+
+- **Richer catalogs** — 9 restaurants (40+ meals), 48 grocery SKUs (12 per supermarket)
+- **Grocery photos** — product thumbnails in shop, staples, and recipe cards
+- **Bundled food images** — per-meal photo mapping across Eat out and Home
 
 ## v8.2 polish
 

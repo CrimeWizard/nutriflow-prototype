@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import { ChefHat, Plus, ShoppingBag } from 'lucide-react';
 import { FavoriteButton } from '../components/FavoriteButton';
+import { FoodImage } from '../components/FoodImage';
 import { SearchBar } from '../components/SearchBar';
 import {
   getProductsForSupermarket, getSupermarket, PRODUCT_CATEGORIES, recipes, supermarkets,
@@ -8,6 +9,8 @@ import {
 import { useApp } from '../context/AppContext';
 import { productFavoriteKey, recipeFavoriteKey } from '../lib/favorites';
 import { matchesQuery } from '../lib/search';
+import { productPhoto } from '../lib/productImages';
+import { recipePhoto } from '../lib/foodImages';
 import { getStapleProducts, hasGroceryOrderHistory } from '../lib/staples';
 import { formatEgp } from '../utils';
 import type { ProductCategory, ShopProduct } from '../types';
@@ -155,7 +158,14 @@ export function Groceries() {
               <div className="staples-scroll">
                 {staples.map((p) => (
                   <button key={p.id} type="button" className="staple-card" onClick={() => addProduct(p)}>
-                    <span className="staple-thumb">{p.image}</span>
+                    <span className="staple-thumb">
+                      <FoodImage
+                        src={productPhoto(p)}
+                        fallback={p.image}
+                        alt=""
+                        className="staple-thumb-img"
+                      />
+                    </span>
                     <span className="staple-name">{p.name}</span>
                     <span className="staple-price">{formatEgp(p.price)}</span>
                   </button>
@@ -194,7 +204,14 @@ export function Groceries() {
                 const favKey = productFavoriteKey(p.id);
                 return (
                   <div key={p.id} className="product-line">
-                    <div className="product-line-thumb">{p.image}</div>
+                    <div className="product-line-thumb">
+                      <FoodImage
+                        src={productPhoto(p)}
+                        fallback={p.image}
+                        alt=""
+                        className="product-line-img"
+                      />
+                    </div>
                     <div className="product-line-info">
                       <h4>{p.brand} — {p.name}</h4>
                       <p>{p.size}</p>
@@ -244,7 +261,14 @@ export function Groceries() {
               const favKey = recipeFavoriteKey(recipe.id);
               return (
                 <article key={recipe.id} className="recipe-item">
-                  <div className="recipe-visual">{recipe.image}</div>
+                  <div className="recipe-visual recipe-photo-wrap">
+                    <FoodImage
+                      src={recipePhoto(recipe.id)}
+                      fallback={recipe.image}
+                      alt=""
+                      className="recipe-photo"
+                    />
+                  </div>
                   <div className="recipe-content">
                     <div className="menu-item-title-row">
                       <h3>{recipe.name}</h3>
