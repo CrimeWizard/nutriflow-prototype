@@ -191,23 +191,37 @@ label.field-label {
   min-height: 0;
   overflow: hidden;
 }
-.screen-with-footer > .scroll {
+/* Bottom nav is position:absolute — reserve space so checkout bar isn't hidden */
+.screen-with-footer.has-bottom-nav {
+  padding-bottom: 78px;
+}
+.screen-with-footer > .scroll,
+.cart-scroll {
   flex: 1;
   min-height: 0;
   overflow-y: auto;
+  overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
-  padding-bottom: 16px;
+  overscroll-behavior: contain;
+  padding: 0 20px 12px;
+  scrollbar-width: none;
 }
+.cart-scroll::-webkit-scrollbar { display: none; }
 
 .sticky-order-bar {
   flex-shrink: 0;
-  padding: 12px 20px 10px;
+  padding: 14px 20px 12px;
   background: var(--white);
   border-top: 1px solid var(--slate-200);
-  box-shadow: 0 -4px 20px rgba(15, 23, 32, 0.06);
+  box-shadow: 0 -8px 24px rgba(15, 23, 32, 0.1);
+  z-index: 30;
 }
 .sticky-order-bar .total-row {
-  margin-bottom: 10px;
+  margin-bottom: 12px;
+}
+.sticky-order-bar .total-row strong {
+  font-size: 26px;
+  color: var(--ink);
 }
 
 .field-error {

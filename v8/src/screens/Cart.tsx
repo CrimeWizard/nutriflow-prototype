@@ -38,8 +38,8 @@ export function Cart() {
   const canCheckout = profile.phone.length >= 10 && profile.address.trim().length > 0;
 
   return (
-    <div className="screen-with-footer">
-      <div className="scroll fade-in">
+    <div className="screen-with-footer has-bottom-nav">
+      <div className="cart-scroll fade-in">
         <div className="page-header">
           <h1>Your cart</h1>
           <p>{countCartItems(cart)} items · {groups.size} {groups.size === 1 ? 'delivery' : 'deliveries'} · Pay on delivery</p>
@@ -139,8 +139,13 @@ export function Cart() {
           <span>Total</span>
           <strong>{formatEgp(cartTotal)}</strong>
         </div>
-        <button type="button" className="btn btn-primary" onClick={() => setScreen('checkout')}>
-          Place order · {formatEgp(cartTotal)}
+        <button
+          type="button"
+          className="btn btn-primary"
+          disabled={!canCheckout}
+          onClick={() => setScreen('checkout')}
+        >
+          {canCheckout ? `Place order · ${formatEgp(cartTotal)}` : 'Add phone & address at checkout'}
         </button>
       </div>
     </div>
