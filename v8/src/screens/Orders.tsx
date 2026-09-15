@@ -18,7 +18,7 @@ export function Orders() {
           </button>
           <div className="page-header" style={{ marginBottom: 0 }}>
             <h1 style={{ fontSize: 22 }}>My orders</h1>
-            <p style={{ fontSize: 13, marginTop: 4 }}>Pay on delivery when each driver arrives</p>
+            <p style={{ fontSize: 13, marginTop: 4 }}>Pay on delivery · demo orders auto-complete in ~90s</p>
           </div>
         </div>
 
@@ -101,15 +101,18 @@ export function Orders() {
                   </div>
                 ))}
                 {active && (
-                  <button
-                    type="button"
-                    className="btn btn-secondary"
-                    style={{ marginTop: 12, width: '100%' }}
-                    onClick={() => markOrderDelivered(order.id)}
-                  >
-                    <CheckCircle size={16} />
-                    Mark as delivered
-                  </button>
+                  <>
+                    <p className="order-demo-hint">Or tap below when your order arrives</p>
+                    <button
+                      type="button"
+                      className="btn btn-secondary"
+                      style={{ width: '100%' }}
+                      onClick={() => markOrderDelivered(order.id)}
+                    >
+                      <CheckCircle size={16} />
+                      Mark as delivered
+                    </button>
+                  </>
                 )}
               </div>
             );

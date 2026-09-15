@@ -11,7 +11,7 @@ All versions live in **one repo** — each folder is a frozen, runnable prototyp
 | v5 | `v5/` | 5177 | **Pillar 1** — weekly plan (frozen) |
 | v6 | `v6/` | 5178 | **Pillar 2** — honest commerce (frozen) |
 | v7 | `v7/` | 5179 | **Pillar 3** — habit & depth (frozen at v7.2) |
-| v8 | `v8/` | 5180 | **Pillar 4** — trust, visuals, catalogs (v8.3) |
+| v8 | `v8/` | 5180 | **Pillar 4** — trust, visuals, catalogs (v8.4) |
 
 ## Run any version
 

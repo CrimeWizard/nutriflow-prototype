@@ -123,7 +123,7 @@ export function Home() {
                 <p>
                   {order.deliveries.length} {order.deliveries.length === 1 ? 'delivery' : 'deliveries'}
                   {' · '}{formatEgp(order.total)} · Pay on delivery
-                  {' · '}Mark delivered in Orders when it arrives
+                  {' · '}Demo: auto-completes in ~90s
                 </p>
                 {order.deliveries.map((d) => (
                   <span key={d.id} className="active-order-eta">

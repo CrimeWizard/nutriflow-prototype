@@ -1,7 +1,7 @@
-import { ChevronRight, Dumbbell, Heart, Target, User } from 'lucide-react';
+import { ChevronRight, Dumbbell, Heart, Package, Target, User } from 'lucide-react';
 import { BUDGET_TIERS, DELIVERY_AREAS, getRecipe, getRestaurant, GOALS, SHOPPING_MODES } from '../data/mockData';
 import { useApp } from '../context/AppContext';
-import { goalLabel, formatEgp, WEEK_ORDER } from '../utils';
+import { formatEgp, goalLabel, isActiveOrder, WEEK_ORDER } from '../utils';
 
 export function Profile() {
   const {
@@ -38,11 +38,13 @@ export function Profile() {
     }
   };
 
+  const activeOrders = orderHistory.filter((o) => isActiveOrder(o));
+
   return (
     <div className="scroll fade-in">
       <div className="page-header">
         <h1>Profile</h1>
-        <p>Your details & preferences</p>
+        <p>Orders, favorites & settings</p>
       </div>
 
       <div className="profile-avatar">
@@ -52,6 +54,27 @@ export function Profile() {
         <h2>{profile.name || 'Your name'}</h2>
         <p>{profile.area} · {goalLabel(profile.goal)}</p>
       </div>
+
+      <button
+        type="button"
+        className={`profile-orders-card${activeOrders.length > 0 ? ' profile-orders-card--active' : ''}`}
+        onClick={() => setScreen('orders')}
+      >
+        <div className="profile-orders-card-icon">
+          <Package size={20} />
+        </div>
+        <div className="profile-orders-card-body">
+          <strong>My orders</strong>
+          <p>
+            {activeOrders.length > 0
+              ? `${activeOrders.length} on the way · ${orderHistory.length} total`
+              : orderHistory.length === 0
+                ? 'No orders yet — place one from your cart'
+                : `${orderHistory.length} order${orderHistory.length === 1 ? '' : 's'} · view details`}
+          </p>
+        </div>
+        <ChevronRight size={18} />
+      </button>
 
       {favorites.length > 0 && (
         <div className="profile-section">
@@ -193,20 +216,6 @@ export function Profile() {
             </button>
           ))}
         </div>
-      </div>
-
-      <div className="profile-section">
-        <button type="button" className="profile-orders-link" onClick={() => setScreen('orders')}>
-          <div>
-            <h3 style={{ marginBottom: 4 }}>My orders</h3>
-            <p style={{ fontSize: 13, color: 'var(--slate-500)' }}>
-              {orderHistory.length === 0
-                ? 'No orders yet — place one from your cart'
-                : `${orderHistory.length} order${orderHistory.length === 1 ? '' : 's'} · view details`}
-            </p>
-          </div>
-          <ChevronRight size={18} />
-        </button>
       </div>
 
       <button type="button" className="btn btn-secondary" style={{ marginTop: 8 }} onClick={resetOnboarding}>

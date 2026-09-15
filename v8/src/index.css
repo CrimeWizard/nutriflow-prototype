@@ -229,17 +229,55 @@ label.field-label {
   line-height: 1.4;
 }
 
-.profile-orders-link {
+.profile-orders-card {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 12px;
   width: 100%;
   text-align: left;
-  gap: 12px;
+  padding: 14px 16px;
+  margin-bottom: 20px;
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius-lg);
+  background: white;
 }
-.profile-orders-link h3 {
+.profile-orders-card--active {
+  border-color: var(--green-border);
+  background: var(--green-subtle);
+}
+.profile-orders-card-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: var(--slate-100);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--slate-600);
+  flex-shrink: 0;
+}
+.profile-orders-card--active .profile-orders-card-icon {
+  background: white;
+  color: var(--green-hover);
+}
+.profile-orders-card-body { flex: 1; min-width: 0; }
+.profile-orders-card-body strong {
+  display: block;
   font-size: 15px;
   font-weight: 700;
+  margin-bottom: 2px;
+}
+.profile-orders-card-body p {
+  font-size: 13px;
+  color: var(--slate-500);
+  line-height: 1.4;
+}
+.order-demo-hint {
+  font-size: 12px;
+  color: var(--slate-500);
+  text-align: center;
+  margin-top: 12px;
+  margin-bottom: 8px;
 }
 
 .active-orders-block {

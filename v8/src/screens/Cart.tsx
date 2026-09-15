@@ -5,7 +5,7 @@ import { formatEgp } from '../utils';
 
 export function Cart() {
   const {
-    cart, cartTotal, profile, setScreen,
+    cart, cartTotal, profile, setScreen, goTab,
     removeCartLine, updateCartQuantity, removeCartGroup,
   } = useApp();
 
@@ -17,6 +17,9 @@ export function Cart() {
           <div className="empty-icon"><ShoppingCart size={28} strokeWidth={1.5} /></div>
           <h3>Your cart is empty</h3>
           <p>Add one meal or a grocery run — then place your order here.</p>
+          <button type="button" className="btn btn-primary" style={{ marginTop: 16 }} onClick={() => goTab('home')}>
+            Browse today&apos;s meals
+          </button>
         </div>
       </div>
     );

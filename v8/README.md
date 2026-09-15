@@ -1,6 +1,12 @@
 # NutriFlow Prototype v8
 
-**Pillar 4 + v8.3 polish** — trust copy, food photos, quick-meal preview, honest budget UX. Built on v7 habit + v6 commerce + v5 weekly plan.
+**Pillar 4 + v8.4 polish** — trust copy, food photos, quick-meal preview, honest budget UX. Built on v7 habit + v6 commerce + v5 weekly plan.
+
+## v8.4 micro-polish
+
+- **Profile** — My orders promoted to top with active-order status
+- **Orders** — Clear demo auto-complete (~90s) copy
+- **Cart** — Empty state CTA back to Home
 
 ## v8.3 polish
 
