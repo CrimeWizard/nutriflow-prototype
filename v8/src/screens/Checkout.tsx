@@ -10,7 +10,7 @@ export function Checkout() {
   const [triedSubmit, setTriedSubmit] = useState(false);
   const deliveries = buildDeliveryGroups(cart);
 
-  const phoneOk = profile.phone.length >= 10;
+  const phoneOk = /^01\d{9}$/.test(profile.phone.replace(/\s/g, ''));
   const addressOk = profile.address.trim().length > 0;
   const canPlace = phoneOk && addressOk && cart.length > 0;
 
@@ -82,12 +82,12 @@ export function Checkout() {
           <input
             id="checkout-phone"
             type="tel"
-            placeholder="01xxxxxxxxx"
+            placeholder="01xxxxxxxxx (11 digits)"
             value={profile.phone}
             onChange={(e) => setProfile({ phone: e.target.value })}
           />
           {triedSubmit && !phoneOk && (
-            <p className="field-error">Enter a valid phone number to place your order.</p>
+            <p className="field-error">Enter an Egyptian mobile number (01xxxxxxxxx).</p>
           )}
         </div>
 

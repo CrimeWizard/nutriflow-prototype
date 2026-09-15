@@ -35,7 +35,8 @@ export function Cart() {
   }
 
   const groups = groupCartItems(cart);
-  const canCheckout = profile.phone.length >= 10 && profile.address.trim().length > 0;
+  const hasDeliveryDetails =
+    /^01\d{9}$/.test(profile.phone.replace(/\s/g, '')) && profile.address.trim().length > 0;
 
   return (
     <div className="screen-with-footer has-bottom-nav">
@@ -127,9 +128,9 @@ export function Cart() {
           <div className="delivery-row"><span>Address</span><span>{profile.address || 'Add in checkout'}</span></div>
         </div>
 
-        {!canCheckout && (
+        {!hasDeliveryDetails && (
           <p className="checkout-hint-warn">
-            Add your phone and street address at checkout to place the order.
+            Add your phone and street address on the next screen to place the order.
           </p>
         )}
       </div>
@@ -142,10 +143,9 @@ export function Cart() {
         <button
           type="button"
           className="btn btn-primary"
-          disabled={!canCheckout}
           onClick={() => setScreen('checkout')}
         >
-          {canCheckout ? `Place order · ${formatEgp(cartTotal)}` : 'Add phone & address at checkout'}
+          Continue to checkout · {formatEgp(cartTotal)}
         </button>
       </div>
     </div>
