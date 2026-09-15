@@ -1,3 +1,3 @@
-# Food & product images (v8.3)
+# Food & product images
 
-Bundled JPEG assets for offline demo. `chicken-bowl.jpg` uses real food photography; other meal and product slots use stable bundled photography mapped in `src/lib/foodImages.ts` and `src/lib/productImages.ts`.
+Bundled JPEGs from [Pexels](https://www.pexels.com) (free for commercial use). Mapped in `src/lib/foodImages.ts` and `src/lib/productImages.ts`.
