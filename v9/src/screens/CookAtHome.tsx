@@ -3,7 +3,8 @@ import { ShoppingBag } from 'lucide-react';
 import { FavoriteButton } from '../components/FavoriteButton';
 import { FoodImage } from '../components/FoodImage';
 import { SearchBar } from '../components/SearchBar';
-import { getSupermarket, recipes } from '../data/mockData';
+import { SupermarketPicker } from '../components/SupermarketPicker';
+import { recipes } from '../data/mockData';
 import { useApp } from '../context/AppContext';
 import { recipeFavoriteKey } from '../lib/favorites';
 import { recipePhoto } from '../lib/foodImages';
@@ -11,10 +12,9 @@ import { matchesQuery } from '../lib/search';
 
 export function CookAtHome() {
   const {
-    openIngredients, selectedSupermarketId, isFavorite, toggleFavorite,
+    openIngredients, selectedSupermarketId, setSelectedSupermarketId, isFavorite, toggleFavorite,
   } = useApp();
   const [query, setQuery] = useState('');
-  const supermarket = getSupermarket(selectedSupermarketId);
 
   const filteredRecipes = useMemo(() => {
     if (!query.trim()) return recipes;
@@ -28,8 +28,14 @@ export function CookAtHome() {
     <div className="scroll fade-in">
       <div className="page-header">
         <h1>Cook at home</h1>
-        <p>Recipes with ingredients ready from {supermarket?.name ?? 'your supermarket'}</p>
+        <p>Pick a supermarket, then shop ingredients for any recipe</p>
       </div>
+
+      <SupermarketPicker
+        selectedId={selectedSupermarketId}
+        onSelect={setSelectedSupermarketId}
+        title="Buy ingredients from"
+      />
 
       <SearchBar value={query} onChange={setQuery} placeholder="Search recipes..." />
 

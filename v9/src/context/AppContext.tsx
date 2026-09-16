@@ -94,6 +94,7 @@ interface AppContextValue extends AppState {
   isFavorite: (key: string) => boolean;
   toggleFavorite: (favorite: Favorite) => void;
   setSelectedSupermarketId: (id: string) => void;
+  setRecipeSupermarket: (id: string) => void;
   openQuickMealPreview: (meal: PlannedMeal) => void;
   closeQuickMealPreview: () => void;
   confirmQuickMealAdd: () => void;
@@ -204,6 +205,13 @@ export function AppProvider({ children }: { children: ReactNode }) {
     setSelectedSupermarketIdState(id);
     try { localStorage.setItem('nf-v9-supermarket', id); } catch { /* empty */ }
   }, []);
+
+  const setRecipeSupermarket = useCallback((id: string) => {
+    setSelectedSupermarketId(id);
+    if (ingredientRecipe) {
+      setIngredientSelections(defaultSelectionsForRecipe(ingredientRecipe, id));
+    }
+  }, [ingredientRecipe, setSelectedSupermarketId]);
 
   const setProfile = useCallback((patch: Partial<UserProfile>) => {
     setProfileState((prev) => {
@@ -534,7 +542,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     addIngredientsToCart, addPlannedMealsToCart, addPlannedWeekToCart, addPlannedMealToCart,
     setSelectedPlanDay, placeOrder, markOrderDelivered,
     reorderFromDelivery, reorderFromOrder, isFavorite, toggleFavorite,
-    setSelectedSupermarketId, openQuickMealPreview, closeQuickMealPreview,
+    setSelectedSupermarketId, setRecipeSupermarket, openQuickMealPreview, closeQuickMealPreview,
     confirmQuickMealAdd, cartTotal,
   };
 

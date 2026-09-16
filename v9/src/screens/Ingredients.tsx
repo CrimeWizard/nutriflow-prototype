@@ -1,4 +1,6 @@
-import { ArrowLeft, Check, CheckSquare, ChefHat, ShoppingCart, Square } from 'lucide-react';
+import { useRef } from 'react';
+import { ArrowLeft, Check, CheckSquare, ChefHat, ChevronDown, ShoppingCart, Square } from 'lucide-react';
+import { SupermarketPicker } from '../components/SupermarketPicker';
 import { findShopProduct, getSupermarket } from '../data/mockData';
 import { useApp } from '../context/AppContext';
 import { ingredientOptionsForSupermarket } from '../lib/recipeIngredients';
@@ -57,8 +59,10 @@ export function Ingredients() {
     addIngredientsToCart,
     closeIngredients,
     selectedSupermarketId,
+    setRecipeSupermarket,
   } = useApp();
 
+  const recipeMethodRef = useRef<HTMLElement>(null);
   const supermarket = getSupermarket(selectedSupermarketId);
 
   if (!ingredientRecipe) return null;
@@ -78,22 +82,37 @@ export function Ingredients() {
     'Taste, adjust seasoning, and serve while fresh.',
   ];
 
+  const scrollToRecipe = () => {
+    recipeMethodRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
   return (
     <div className="ingredients-layout">
-      <div className="ingredients-head">
-        <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
+      <div className="ingredients-top">
+        <div className="ingredients-head">
           <button type="button" className="btn-icon" onClick={closeIngredients} aria-label="Back">
             <ArrowLeft size={18} />
           </button>
-          <div>
-            <h1>Recipe & ingredients</h1>
-            <p>{ingredientRecipe.name}</p>
+          <div className="ingredients-head-body">
+            <h1>{ingredientRecipe.name}</h1>
+            <div className="recipe-teaser">
+              <span>{ingredientRecipe.time}</span>
+              <span className="recipe-teaser-dot" aria-hidden="true">·</span>
+              <span>{steps.length} steps</span>
+              <span className="recipe-teaser-dot" aria-hidden="true">·</span>
+              <span>{ingredientRecipe.servings} {ingredientRecipe.servings === 1 ? 'serving' : 'servings'}</span>
+              <button type="button" className="recipe-teaser-link" onClick={scrollToRecipe}>
+                View recipe
+                <ChevronDown size={14} />
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-
-      <div className="ingredients-hint">
-        From {supermarket?.name ?? 'your supermarket'} · {selectedCount} of {ingredientRecipe.ingredients.length} selected · swap any brand or size
+        <SupermarketPicker
+          selectedId={selectedSupermarketId}
+          onSelect={setRecipeSupermarket}
+          showTitle={false}
+        />
       </div>
 
       <div className="ingredients-scroll">
@@ -103,10 +122,10 @@ export function Ingredients() {
           return (
             <section key={ing.id} className={`ing-block ${included ? '' : 'ing-block-excluded'}`}>
               <div className="ing-title-row">
-                <div>
-                  <h2>{idx + 1}. {ing.name}</h2>
-                  <p className="ing-amount">Needed: {ing.amount}</p>
-                </div>
+                <h2>
+                  {idx + 1}. {ing.name}
+                  <span className="ing-amount-inline">· {ing.amount}</span>
+                </h2>
                 <button
                   type="button"
                   className={`ing-include-toggle ${included ? 'selected' : ''}`}
@@ -151,7 +170,7 @@ export function Ingredients() {
           );
         })}
 
-        <section className="recipe-method-card">
+        <section ref={recipeMethodRef} className="recipe-method-card" id="recipe-method">
           <div className="recipe-method-head">
             <ChefHat size={18} />
             <h2>Recipe</h2>

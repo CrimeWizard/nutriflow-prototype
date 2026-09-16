@@ -10,30 +10,10 @@ import {
 } from '../utils';
 
 const HOME_ACTIONS = [
-  {
-    label: 'Groceries',
-    desc: 'Shop staples',
-    icon: Apple,
-    screen: 'groceries' as const,
-  },
-  {
-    label: 'Eat out',
-    desc: 'Restaurants',
-    icon: UtensilsCrossed,
-    screen: 'restaurants' as const,
-  },
-  {
-    label: 'Supplements',
-    desc: 'Gym basics',
-    icon: Pill,
-    screen: 'supplements' as const,
-  },
-  {
-    label: "Today's plan",
-    desc: 'Meals today',
-    icon: UserRoundCheck,
-    screen: 'today-plan' as const,
-  },
+  { label: 'Groceries', icon: Apple, screen: 'groceries' as const },
+  { label: 'Eat out', icon: UtensilsCrossed, screen: 'restaurants' as const },
+  { label: 'Supplements', icon: Pill, screen: 'supplements' as const },
+  { label: "Today's plan", icon: UserRoundCheck, screen: 'today-plan' as const },
 ];
 
 export function Home() {
@@ -71,18 +51,17 @@ export function Home() {
       </div>
 
       <div className="home-action-grid">
-        {HOME_ACTIONS.map(({ label, desc, icon: Icon, screen }) => (
+        {HOME_ACTIONS.map(({ label, icon: Icon, screen }) => (
           <button
             key={label}
             type="button"
             className="home-action-tile"
             onClick={() => setScreen(screen)}
           >
-            <Icon size={24} />
-            <div>
-              <strong>{label}</strong>
-              <span>{desc}</span>
-            </div>
+            <span className="home-action-icon">
+              <Icon size={22} strokeWidth={1.75} />
+            </span>
+            <span className="home-action-label">{label}</span>
           </button>
         ))}
       </div>

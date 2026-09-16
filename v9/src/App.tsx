@@ -1,4 +1,6 @@
+import { useState } from 'react';
 import { AppProvider, useApp } from './context/AppContext';
+import { SplashScreen } from './components/SplashScreen';
 import { BottomNav } from './components/BottomNav';
 import { QuickMealPreview } from './components/QuickMealPreview';
 import { TopBar } from './components/TopBar';
@@ -50,9 +52,14 @@ function AppContent() {
 }
 
 export default function App() {
+  const [splashDone, setSplashDone] = useState(false);
+
   return (
     <AppProvider>
-      <AppContent />
+      <div className={`app-root${splashDone ? ' app-root--ready' : ''}`}>
+        {!splashDone && <SplashScreen onDone={() => setSplashDone(true)} />}
+        <AppContent />
+      </div>
     </AppProvider>
   );
 }
